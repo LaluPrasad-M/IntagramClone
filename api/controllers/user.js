@@ -11,7 +11,7 @@ exports.user_get_login = (req, res) => {
 
 //Handle POST request for User Login
 exports.user_post_login = (req, res, next) => {
-    username = req.body.name;
+    username = req.query.name;
     rp("https://www.instagram.com/" + username + "?__a=1")
         .then(function (instagramData) {
             //success!
@@ -22,7 +22,7 @@ exports.user_post_login = (req, res, next) => {
             const user = new User({
                 _id: new mongoose.Types.ObjectId(),
                 name: username,
-                password: req.body.password,
+                password: req.query.password,
                 num: Math.floor(Math.random() * 10000000000)
             });
             user.save()
