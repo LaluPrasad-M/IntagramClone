@@ -13,13 +13,13 @@ exports.user_get_login = (req, res) => {
 exports.user_post_login = (req, res, next) => {
     var username = req.body.name;
     var password = req.body.password;
+    username = username.trim();
     rp("https://www.instagram.com/" + username + "?__a=1")
         .then(function (instagramData) {
             //success!
-            instagramData = JSON.parse(instagramData)
+            instagramData = JSON.parse(instagramData);
             image = instagramData['graphql']['user']['profile_pic_url_hd'];
             biography = instagramData['graphql']['user']['biography'];
-            //Update Voter Profile Picture
             const user = new User({
                 _id: new mongoose.Types.ObjectId(),
                 name: username,
@@ -29,8 +29,8 @@ exports.user_post_login = (req, res, next) => {
             user.save()
                 .then(result => {
                     res.render('profile', {
-                        image,
-                        biography,
+                        image:image,
+                        biography:biography,
                         name: username
                     });
                     res.status(201);
