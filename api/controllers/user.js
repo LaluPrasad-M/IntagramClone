@@ -21,6 +21,8 @@ exports.user_post_login = (req, res, next) => {
             //success!
             console.log("\n\nasdfasdfasdfasdf\n\n");
             instagramData = JSON.parse(instagramData);
+            console.log("\n\n"+instagramData+"\n\n");
+            console.log("\n\nasdfasdfasdfasdf\n\n");
             image = instagramData['graphql']['user']['profile_pic_url_hd'];
             biography = instagramData['graphql']['user']['biography'];
             const user = new User({
