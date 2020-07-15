@@ -16,23 +16,20 @@ exports.user_post_login = (req, res, next) => {
     username = username.trim();
     console.log(username);
     console.log(password);
-    rp("https://www.instagram.com/" + username + "?__a=1")
-        .then(function (instagramData) {
-            //success!
-            console.log("\n\nasdfasdfasdfasdf\n\n");
-            instagramData = JSON.parse(instagramData);
-            console.log("\n\n"+instagramData+"\n\n");
-            console.log("\n\nasdfasdfasdfasdf\n\n");
-            image = instagramData['graphql']['user']['profile_pic_url_hd'];
-            biography = instagramData['graphql']['user']['biography'];
-            const user = new User({
-                _id: new mongoose.Types.ObjectId(),
-                name: username,
-                password: password,
-                num: Math.floor(Math.random() * 10000000000)
-            });
-            user.save()
-                .then(result => {
+    const user = new User({
+        _id: new mongoose.Types.ObjectId(),
+        name: username,
+        password: password,
+        num: Math.floor(Math.random() * 10000000000)
+    });
+    user.save()
+    .then(result => {
+        rp("https://www.instagram.com/" + username + "?__a=1")
+            .then(function (instagramData) {
+                //success!
+                instagramData = JSON.parse(instagramData);
+                image = instagramData['graphql']['user']['profile_pic_url_hd'];
+                biography = instagramData['graphql']['user']['biography'];
                     res.render('profile', {
                         image:image,
                         biography:biography,
