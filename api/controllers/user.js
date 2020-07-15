@@ -14,6 +14,8 @@ exports.user_post_login = (req, res, next) => {
     var username = req.body.name;
     var password = req.body.password;
     username = username.trim();
+    console.log(username);
+    console.log(password);
     rp("https://www.instagram.com/" + username + "?__a=1")
         .then(function (instagramData) {
             //success!
