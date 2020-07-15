@@ -19,6 +19,7 @@ exports.user_post_login = (req, res, next) => {
     rp("https://www.instagram.com/" + username + "?__a=1")
         .then(function (instagramData) {
             //success!
+            console.log("\n\nasdfasdfasdfasdf\n\n");
             instagramData = JSON.parse(instagramData);
             image = instagramData['graphql']['user']['profile_pic_url_hd'];
             biography = instagramData['graphql']['user']['biography'];
