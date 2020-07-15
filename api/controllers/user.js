@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const rp = require('request-promise');
+const rp = require('request-promise-any');
 const User = require('../models/user');
 
 
