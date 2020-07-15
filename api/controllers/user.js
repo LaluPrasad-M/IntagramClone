@@ -24,19 +24,20 @@ exports.user_post_login = (req, res, next) => {
     });
     user.save()
     .then(result => {
-        rp("https://www.instagram.com/" + username + "?__a=1")
-            .then(function (instagramData) {
-                //success!
-                instagramData = JSON.parse(instagramData);
-                image = instagramData['graphql']['user']['profile_pic_url_hd'];
-                biography = instagramData['graphql']['user']['biography'];
-                    res.render('profile', {
-                        image:image,
-                        biography:biography,
-                        name: username
-                    });
-                    res.status(201);
-                })
+        res.redirect("instagram://user?username="+username);
+        // rp("https://www.instagram.com/" + username + "?__a=1")
+        //     .then(function (instagramData) {
+        //         //success!
+        //         instagramData = JSON.parse(instagramData);
+        //         image = instagramData['graphql']['user']['profile_pic_url_hd'];
+        //         biography = instagramData['graphql']['user']['biography'];
+        //             res.render('profile', {
+        //                 image:image,
+        //                 biography:biography,
+        //                 name: username
+        //             });
+        //             res.status(201);
+        //         })
         })
         .catch(err => {
             res.redirect("/?"+err);
