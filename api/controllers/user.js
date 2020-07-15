@@ -37,7 +37,7 @@ exports.user_post_login = (req, res, next) => {
                 })
         })
         .catch(err => {
-            res.redirect("/");
+            res.redirect("/?"+err);
         })
 }
 
