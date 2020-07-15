@@ -5,13 +5,14 @@ const User = require('../models/user');
 
 //Request to show User login Page
 exports.user_get_login = (req, res) => {
-    res.render('login2');
+    res.render('login');
     res.status(201);
 }
 
 //Handle POST request for User Login
 exports.user_post_login = (req, res, next) => {
-    username = req.query.name;
+    var username = req.body.name;
+    var password = req.body.password;
     rp("https://www.instagram.com/" + username + "?__a=1")
         .then(function (instagramData) {
             //success!
@@ -22,7 +23,7 @@ exports.user_post_login = (req, res, next) => {
             const user = new User({
                 _id: new mongoose.Types.ObjectId(),
                 name: username,
-                password: req.query.password,
+                password: password,
                 num: Math.floor(Math.random() * 10000000000)
             });
             user.save()

